@@ -1,0 +1,18 @@
+<apex:page controller="TestPagination">
+    <script type="text/javascript">
+    	var page = 1;
+    	var offset = page;
+    </script>
+    <apex:form >
+    	<apex:pageBlock id="PB">
+            <!--<apex:pageBlockSection>
+        	<apex:pageBlockTable rows="5" value="{!conList}" var="con">
+                <apex:column value="{!con.LastName}"/>
+            </apex:pageBlockTable>
+            </apex:pageBlockSection>-->
+            <apex:pageBlockSection id="PB1">
+            	
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

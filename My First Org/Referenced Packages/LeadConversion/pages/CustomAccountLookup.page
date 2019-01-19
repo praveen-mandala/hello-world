@@ -1,0 +1,9 @@
+<!-- 
+	Author: Vasu Takasi
+	Page Name: CustomAccountLookup
+	Description: Used for creation of Custom AccountLookup window
+ -->
+<apex:page showHeader="false"   sideBar="false"  tabStyle="Account" id="thePage" > <apex:form id="theForm">
+ 	<c:CustomAccountLookupVC id="theVC"/>
+ </apex:form>
+</apex:page>

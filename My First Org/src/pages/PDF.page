@@ -1,0 +1,24 @@
+<!--
+Author : Praveen Goud
+Date   : 14-07-2018 
+Description : Display List Of Account details
+
+-->
+<apex:page standardController="Account" recordSetVar="Accts" renderAs="pdf" >
+    <apex:form >
+        <apex:image value="{!$Resource.Images}" >{!today()}</apex:image>
+        <apex:pageBlock title="Accounts">
+            <apex:pageBlockTable value="{!Accts}" var="act" border="1">
+                <apex:column value="{!act.Name}"/> 	
+                <apex:column value="{!act.AnnualRevenue}"/>
+                <apex:column value="{!act.Phone}"/>
+                <apex:column value="{!act.Industry}"/>
+                <apex:column value="{!act.Status__c}"/>
+                <apex:column headerValue="Status"  > 
+                    <apex:outputText rendered="{! If(act.Status__c=='Active' ,true,false) }" value="{!act.Status__c}" style="width:100px; height:40px; background-color:yellow" />
+                    <apex:outputText rendered="{! If(act.Status__c=='Completed' ,true,false) }" value="{!act.Status__c}" style="width:100px; height:40px; background-color:green"/>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

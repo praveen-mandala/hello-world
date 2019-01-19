@@ -1,0 +1,13 @@
+<!--
+Author : Praveen Goud
+Date   : 29-07-2018 
+Description : Display Contacts using Apex repeat component.
+-->
+<apex:page standardController="Contact" recordSetVar="conList">
+    <apex:pageBlock >
+        <apex:repeat value="{!conList}" var="c" >
+            <apex:outputField value="{!c.LastName}"/>
+            <apex:outputField value="{!c.Email}"/>
+        </apex:repeat>
+    </apex:pageBlock>
+</apex:page>

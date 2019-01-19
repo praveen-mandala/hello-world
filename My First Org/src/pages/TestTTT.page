@@ -1,0 +1,17 @@
+<apex:page standardController="Account" recordSetVar="AccList">
+    <apex:panelGrid columns="2">
+        <apex:form >
+    	<apex:pageBlock >
+            <apex:pageBlockTable value="{!AccList}" var="c">
+            	<apex:column headerValue="Name">
+                        <apex:outputField value="{!c.Name}">
+                    </apex:outputField>
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+            </apex:form>
+        <apex:pageBlock id="test">
+            <apex:actionSupport reRender=""/>
+        </apex:pageBlock>
+    </apex:panelGrid>
+</apex:page>

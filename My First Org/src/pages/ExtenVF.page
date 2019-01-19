@@ -1,0 +1,29 @@
+<apex:page standardController="Account" extensions="TestPageExtension" sidebar="false">
+    <apex:form >
+        <apex:outputPanel id="datePanel" >
+            <apex:pageBlock >
+                <apex:pageBlockTable value="{!lstAccount}" var="acc" border="1" >
+                    <apex:column headerValue="Account Id">
+                        
+                        <apex:outputText >{!acc.Id}</apex:outputText>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Account Name </apex:facet> 
+                        <apex:outputText >{!acc.Name}</apex:outputText>
+                    </apex:column>
+                    
+                    <apex:column >
+                        <apex:facet name="header">Account Phone </apex:facet> 
+                        <apex:outputText >{!acc.Phone}</apex:outputText>
+                    </apex:column>
+                    
+                </apex:pageBlockTable>
+                <apex:pageBlockButtons >
+                    <apex:commandButton action="{!showAccount}"  value="Show Records" rerender="datePanel"/>
+                </apex:pageBlockButtons>
+              
+            </apex:pageBlock>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

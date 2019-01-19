@@ -1,0 +1,66 @@
+<apex:page standardController="Event__c" recordSetVar="eveList" extensions="DEVBOOT">
+    <apex:form >
+        <script type="text/javascript">
+		function validate() {
+            
+            alert("hello");
+            var chkbox = document.getElementsByName('childId[]');
+                    var ln = chkbox.length;
+                    alert(ln);
+            for (var i = 0, n = chkbox.length; i < n; i++) {
+
+                        if (chkbox [i].checked)
+                        {
+                            
+                            alert(document.getElementById('op').value);
+                            }
+                }
+                
+            }
+        
+        
+        </script>
+
+        
+        
+        
+        <apex:pageBlock title="Assign Employees to Event">
+            <apex:pageBlockSection title="Event Details" id="pbs1">
+                <apex:outputField value="{!event.Name}"/>
+                <apex:outputField value="{!event.Company__r.Name}"/>
+                <apex:outputField value="{!event.Category__c}"/>
+                <apex:outputField value="{!event.Type__c}"/>
+                <apex:outputField value="{!event.Start_Date__c}"/>
+                <apex:outputField value="{!event.End_Date__c}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="Employees">
+                <apex:pageBlockSectionItem >
+                <apex:pageBlockTable value="{!employeeLst}" var="emp">
+                    <apex:column headerValue="Select">
+                        <input type="checkbox" name="childId[]"/>
+                    </apex:column>
+                    <apex:column headerValue="Employee Name">
+                        <apex:outputField value="{!emp.Name}" id="op"/>
+            			
+                    </apex:column>
+                    <apex:column headerValue="Participation Type">
+                        <apex:selectList value="{!options}" multiselect="false" size="1" id="sl">
+                            <apex:selectOptions value="{!options}"/>
+                        </apex:selectList>
+                    </apex:column>
+                </apex:pageBlockTable>
+                    </apex:pageBlockSectionItem>
+                <apex:pageBlockSection >
+                <apex:commandButton onclick="validate()" value="submit" reRender="pbs1"/>
+                    </apex:pageBlockSection>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection >
+                <apex:panelGrid columns="2">
+                    <apex:commandLink action="{!previous}">Previous </apex:commandLink>
+                    <apex:commandLink action="{!next}">Next </apex:commandLink>
+                </apex:panelGrid>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

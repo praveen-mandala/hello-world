@@ -1,0 +1,37 @@
+<!--
+Author : Praveen
+Date   : 04-07-2018 
+Description :  Display All Records in Visual force page,when text is entered in text search box by using SOSL properties.
+-->
+<apex:page controller="DAY9SOSLController">
+    <apex:form >
+    	<apex:pageBlock >
+        	<apex:pageBlockSection >
+                <apex:inputText title="searchString"  id="input" value="{!searchText}" required="true"/>
+                <apex:commandButton action="{!getRecords}" value="Search">
+                 </apex:commandButton> 
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="Accounts" title="Accounts">
+            	<apex:pageBlockTable value="{!accList}" var="acc">
+                	<apex:column value="{!acc.Name}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="Contacts" title="Contacts">
+            	<apex:pageBlockTable value="{!conList}" var="con">
+                	<apex:column value="{!con.LastName}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="Leads" title="Leads">
+            	<apex:pageBlockTable value="{!leadList}" var="lead">
+                	<apex:column value="{!lead.Name}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="Tests" title="Tests">
+            	<apex:pageBlockTable value="{!testList}" var="test">
+                	<apex:column value="{!test.Name}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

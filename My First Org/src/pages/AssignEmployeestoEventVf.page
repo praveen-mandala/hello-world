@@ -1,0 +1,63 @@
+<!--
+Author : Praveen 
+Date   : 21-07-2017 
+Description : Display Event details and also list of Employees to select the Attendees along with Participation Type 
+-->
+<apex:page controller="AssignEmployeestoEventController" id="Page1" tabStyle="Company__c">
+    <script type="text/javascript">
+     window.onload = function () {
+         if('{!strParmEventId}' == '') {
+             window.location.href='https://c.ap5.visual.force.com/apex/SorryPage?core.apexpages.request.devconsole=1';
+             }
+         }
+    function validate(input, sl){
+        var checkedInput = document.getElementById(input).checked;
+        var selOp = document.getElementById(sl).value;
+        
+        if(checkedInput && selOp =='--select--'){
+            alert('Please Select the Participation Type');
+            document.getElementById(input).checked = false;            
+        }
+    }
+    </script>
+    <apex:form id="form1">
+        <apex:sectionHeader title="Assign Employees" subtitle="Event"/>
+        <apex:pageBlock title="Assign Employees to Event" id="pb">
+            <apex:pageBlockSection title="Event Details" id="pbs1">
+                <apex:outputField value="{!objEvent.Name}" id="tt"/>
+                <apex:outputField value="{!objEvent.Company__r.Name}"/>
+                <apex:outputField value="{!objEvent.Category__c}"/>
+                <apex:outputField value="{!objEvent.Type__c}"/>
+                <apex:outputField value="{!objEvent.Start_Date__c}"/>
+                <apex:outputField value="{!objEvent.End_Date__c}"/>
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+        <apex:pageBlock title="Employees" id="ThePage">
+            <apex:pageBlockTable value="{!paginationlst}" var="wrp" id="pbt2" style="width:100%">
+                <apex:column headerValue="Select" style="width:250px" id="cc">
+                    <apex:inputCheckbox value="{!wrp.checkedEmp}" id="cb1" onchange="validate('{!$Component.cb1}', '{!$Component.sl}');"/>
+                </apex:column>
+                <apex:column headerValue="Employee Name">
+                    <apex:outputText value="{!wrp.empObj.Name}"/>
+                    
+                </apex:column>
+                <apex:column headerValue="Participation Type" id="pbtc2">
+                    <apex:selectList value="{!wrp.selectedOption}" multiselect="false" size="1" id="sl" >
+                        <apex:selectOptions value="{!wrp.items}"/>
+                    </apex:selectList>
+                </apex:column>
+            </apex:pageBlockTable>
+            <apex:outputPanel id="op">
+                <apex:commandButton value="<<Previous" action="{!previous}" rendered="{!hasPrevious}" reRender="ThePage" id="pre"/>
+                <apex:commandButton value="Next >>" action="{!next}" rendered="{!hasNext}" reRender="ThePage" id="nxt"/>
+            </apex:outputPanel>
+            
+            <apex:pageBlockButtons id="pbb" >
+                <apex:commandButton action="{!createRecords}" id="sub" value="submit"  
+                                    onclick="return confirm
+                                             ('The selected Employees will be added as Attendees to the Event with the selected Participation Type. Please click OK to proceed');"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

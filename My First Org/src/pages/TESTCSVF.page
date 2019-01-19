@@ -1,0 +1,18 @@
+<apex:page standardController="Contact" extensions="TESTCS">
+    <apex:form ><apex:pageBlock >
+    	<apex:pageBlockSection >
+        	LastName:<apex:inputText title="LastName" value="{!LastName}"/>
+            Email :<apex:inputText value="{!Email}" />
+            Phone :<apex:inputText value="{!Phone}"/>
+            <apex:commandButton action="{!testMeth}" value="getDetails" reRender="det"/>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+     <apex:pageBlock >
+    	<apex:pageBlockTable value="{!conList}" var="c" id="det"> 
+            <apex:repeat value="{!feildList}" var="o">
+                <apex:column value="{!c[o]}"/>
+                </apex:repeat>
+        </apex:pageBlockTable>
+       </apex:pageBlock>
+    </apex:form>
+</apex:page>

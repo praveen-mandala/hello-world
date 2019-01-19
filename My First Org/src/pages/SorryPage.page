@@ -1,0 +1,3 @@
+<apex:page >
+    <p>Please access this page through assign Employees button on Event detail page</p>
+</apex:page>

@@ -1,0 +1,15 @@
+<!-- Upload a file and put it in your personal documents folder-->
+
+<!-- Page: -->
+<apex:page controller="documentExt">
+    <apex:messages />
+    <apex:form id="theForm">
+      <apex:pageBlock >
+          <apex:pageBlockSection >
+            <apex:inputFile value="{!filebody}" filename="{!fileName}"/>
+            <!--apex:commandButton value="Save" action="{!save}"/-->
+              <apex:commandButton value="Upload" action="{!upload}"/>
+          </apex:pageBlockSection>
+       </apex:pageBlock>
+    </apex:form>
+</apex:page>

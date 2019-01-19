@@ -1,0 +1,10 @@
+<apex:page standardController="Account">
+     <apex:variable value="{!1}" var="rowNum"/>
+
+ <table>
+    <apex:repeat value="{!Account.contacts}" var="item">
+      <tr id="hello{!rowNum}"><td>{!item.Name}</td></tr>
+     <apex:variable var="rowNum" value="{!rowNum + 1}"/>
+   </apex:repeat>
+  </table>
+</apex:page>

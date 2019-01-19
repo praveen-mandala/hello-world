@@ -1,0 +1,28 @@
+<!--
+Author : Praveen
+Date   : 30-07-2018 
+Description :  When Account record is clicked send id as param using apex:actionsupport and show loading text using apex:actionstatus
+-->
+<apex:page standardController="Account" recordSetVar="accountList" extensions="RerenderContactsController">
+    <apex:form ><apex:pageBlock ><apex:pageBlockSection >
+        <apex:pageBlockTable value="{!accountList}" var="acc">
+            <apex:column headerValue="Account Names">
+                <apex:outputText value="{!acc.Name}" styleClass="btn">
+                </apex:outputText> 
+                <apex:actionSupport event="onclick" action="{!getAccountDetails}" reRender="accountDet" status="StatusImg">
+                    <apex:param assignTo="{!param}" name="param" value="{!acc.Id}"/>   </apex:actionSupport>   
+                <apex:actionStatus id="StatusImg">
+                    <apex:facet name="start">
+                        <img src="/img/loading.gif" />
+                    </apex:facet>
+                </apex:actionStatus>
+            </apex:column>
+        </apex:pageBlockTable></apex:pageBlockSection>
+        <apex:pageBlockSection id="accountDet">
+            <apex:pageBlockTable value="{!accList}" var="a">
+                <apex:column value="{!a.Name}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

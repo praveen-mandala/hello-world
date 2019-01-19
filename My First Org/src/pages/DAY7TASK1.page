@@ -1,0 +1,24 @@
+<!--
+Author : Praveen
+Date   : 30-07-2018 
+Description : Display Account Names as pick list and selected Account contacts 
+-->
+<apex:page standardController="Account" extensions="AccountControllerDAY7">
+    <apex:form >
+        <apex:pageBlock title="Account Name">
+            <apex:actionfunction action="{!getContacts}" name="getCont" rerender="pb1" />
+            <apex:selectList value="{!selectedAccId}" size="1" onchange="getCont()"> 
+               <apex:selectOptions value="{!AccountNames}" />
+            </apex:selectList>
+        </apex:pageBlock>
+         
+        <apex:pageBlock title="Contacts"  id="pb1" >
+            <apex:pageBlockTable value="{!contactDetails}" var="con" rendered="{!flag}">
+                <apex:column value="{!con.Name}"/>
+            </apex:pageBlockTable>
+            <apex:pageBlockSection rendered="{!!flag}">
+            No Contacts found for the selected Account!!
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

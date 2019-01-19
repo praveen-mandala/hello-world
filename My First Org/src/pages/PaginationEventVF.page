@@ -1,0 +1,76 @@
+<apex:page controller="PaginationEventVFController">
+    <script type="text/javascript">
+    var offset = 0;
+    var limit = 10;
+    var current = 1;
+    var previous = 0;
+    function nextList(){
+        document.getElementById("pbtn").disabled = false;//enable previous button
+        offset =current * limit;
+        previous = current;
+        
+            current++;
+        
+        //else if(current == total){
+        //   document.getElementById("nbtn").disabled = true;//disable next button
+        //}
+        checkFunction(offset);
+    }
+    /*function previousList(){
+        document.getElementById("nbtn").disabled = false;//enable next button
+        previous--;
+        if(previous >= 0 )
+            current = previous+1;
+        else{
+            document.getElementById("pbtn").disabled = true;//disable previous button
+            current = 0;
+        }
+        offset =previous * limit;
+        window.alert(previous);
+        checkFunction(offset);        
+    }*/
+    </script>
+    <button onclick="previousList()" id="pbtn">Previous</button>
+        
+    <apex:form id="form1">
+
+        <apex:actionFunction action="{!createRecords}" name="checkFunction" reRender="Form">
+                <apex:param name="off" value=""/>
+            </apex:actionFunction>
+        <apex:pageBlock title="Assign Employees to Event" id="pb">
+            <apex:pageBlockSection title="Event Details" id="pbs1">
+                <apex:outputField value="{!event.Name}" id="tt"/>
+                <apex:outputField value="{!event.Company__r.Name}"/>
+                <apex:outputField value="{!event.Category__c}"/>
+                <apex:outputField value="{!event.Type__c}"/>
+                <apex:outputField value="{!event.Start_Date__c}"/>
+                <apex:outputField value="{!event.End_Date__c}"/>
+            </apex:pageBlockSection>
+            
+      </apex:pageBlock> 
+        <apex:actionFunction action="{!createRecords}" name="checkkk"/>
+        <apex:pageBlock title="Employees" id="pb2">
+            <apex:pageBlockSection id="pbs2">
+            	 <apex:pageBlockTable value="{!eventWrapperlst1}" var="wrp" id="pbt2" style="width:100%">
+                     <apex:column headerValue="Select" style="width:250px" id="cc">
+                         <apex:inputCheckbox value="{!wrp.checkedEmp}" id="cb1" onchange="validate('{!$Component.cb1}', '{!$Component.sl}');"/>
+                    </apex:column>
+                    <apex:column headerValue="Employee Name">
+                        <apex:outputText value="{!wrp.employeeName}"/>
+            			
+                    </apex:column>
+                     <apex:column headerValue="Participation Type" id="pbtc2">
+                        <apex:selectList value="{!wrp.selectedOption}" multiselect="false" size="1" id="sl" >
+                            <apex:selectOptions value="{!options}"/>
+                        </apex:selectList>
+                    </apex:column>
+                </apex:pageBlockTable>
+                 </apex:pageBlockSection>
+            <apex:pageBlockButtons id="pbb">
+            	<!--<apex:commandButton action="{!createRecords}" id="sub" value="submit" onclick="return confirm('The selected Employees will be added as Attendees to the Event with the selected Participation Type. Please click OK to proceed');"/>
+                <button onclick="previousList()" id="pbtn">Previous</button>-->
+                <button onclick="checkkk()" id="pbtn">Submit1</button>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

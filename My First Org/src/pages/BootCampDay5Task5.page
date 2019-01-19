@@ -1,0 +1,41 @@
+<!--
+Author : Praveen Goud
+Date   : 29-07-2018 
+Description : Update Contacts using PageBlockTable
+-->
+<apex:page standardController="Contact" recordSetVar="contactList" extensions="ExtController" >
+    <apex:form >
+        <apex:pageBlock mode="inlineEdit">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="UpdateRecords" action="{!save}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!contactList}" var="c">
+                <apex:column headerValue="Name">
+                    <apex:outputField value="{!c.LastName}"/>
+                </apex:column>
+                <apex:column headerValue="Email">
+                    <apex:outputField value="{!c.Email}">
+                    </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="LeadSource">
+                    <apex:outputField value="{!c.LeadSource}">
+                    </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Account Name">
+                    <apex:outputField value="{!c.AccountId}">
+                    </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Level">
+                    <apex:outputField value="{!c.Level__c}">
+                    </apex:outputField>
+                </apex:column>
+                <apex:column headerValue="PDF">
+                    <apex:commandLink value="GetPdf" action="{!getDetails}">
+                    <apex:param assignTo="{!param1}" value="{!c.Id}" name="param1" />
+                    </apex:commandLink>
+                   	
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

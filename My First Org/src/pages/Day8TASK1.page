@@ -1,0 +1,41 @@
+<!--
+Author : Praveen
+Date   : 03-07-2018 
+Description :  When you give input to Input text search box  in visual force page,
+			   corresponding records should be displayed(Contact object)
+-->
+<apex:page controller="AccRemoter">
+    <script type="text/javascript">
+    function getRemoteContact() {
+        var contactName = document.getElementById('contactSearch').value;
+        Visualforce.remoting.Manager.invokeAction (
+            '{!$RemoteAction.AccRemoter.getContacts1}',
+            contactName,
+            function(result, event) {
+                var contactNames='';
+                if(event.status){
+                    contactNames = "<table border = 1><th>LastName</th><th>Email</th><th>Phone</th>";
+                    result.forEach(function(values){
+                        contactNames += "<tr><td>"+values['LastName']+"</td>";
+                        contactNames += "<td>"+values['Email']+"</td>";
+                        contactNames += "<td>"+values['Phone']+"</td></tr>";
+                    });
+                    contactNames += "</table>";
+                    document.getElementById('{!$Component.block.PBS}').innerHTML = contactNames;
+                }  
+                else {
+                    document.getElementById("responseErrors").innerHTML = event.message;
+                }
+            },
+        );
+            {escape: true}
+            }
+            </script>
+    <input id="contactSearch" type="text"/>
+    <button onclick="getRemoteContact()">Get Contact</button>
+    
+    <apex:pageBlock id="block">
+        <apex:pageBlockSection id="PBS"></apex:pageBlockSection>
+    </apex:pageBlock>
+    <div id="responseErrors"></div>
+</apex:page>

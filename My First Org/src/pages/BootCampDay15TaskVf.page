@@ -1,0 +1,18 @@
+<!--
+Author : Praveen
+Date   : 12-07-2018 
+Description : Display a Registration form and save the record.
+-->
+<apex:page controller="BootCampDay15Controller">
+    <apex:form >
+        <apex:pageBlock title="Registrations">
+            <apex:pageBlockSection title="Details">
+                <apex:inputText value="{!Name}" label="Name" title="Name"/>
+                <apex:inputText value="{!Phone}" label="Phone" title="Phone"/>
+                <apex:inputText value="{!Email}" label="Email" title="Email"/>
+                <apex:inputText value="{!Gender}" label="Gender" title="Gender"/>
+                <apex:commandButton action="{!createRegistration}" value="Save Details"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

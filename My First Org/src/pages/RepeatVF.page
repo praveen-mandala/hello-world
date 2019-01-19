@@ -1,0 +1,15 @@
+<apex:page sidebar="false" showHeader="false" standardController="Account" recordSetVar="accounts">
+
+    <apex:pageBlock title="Details" >
+        <apex:pageBlockSection title="User">
+    <h1>Hello World!!</h1></apex:pageBlockSection>
+        <h2>good afternoon</h2>
+        
+        
+       <apex:repeat var="a" value="{! accounts}">
+           <apex:outputField value="{! a.Name}"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <apex:outputField value="{! a.Phone}"/>
+           <br/>
+        </apex:repeat>
+    </apex:pageBlock>
+</apex:page>

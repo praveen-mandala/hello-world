@@ -1,0 +1,26 @@
+<apex:page controller="Appshark_LC1.BulkLeadConversion" showHeader="false">
+	<script type="text/javascript">
+          Visualforce.remoting.Manager.invokeAction('{!$RemoteAction.BulkLeadConversion.invokeLeadConvertProcess}',
+             											'{!JSENCODE($CurrentPage.parameters.lIds)}','{!JSENCODE($CurrentPage.parameters.lvInfo)}',
+            function(result, event){
+                if (event.status) {
+                	if( result == 'Success' ){
+						alert('Selected lead(s) has been converted successfully');
+						  window.opener.location.href = '/00Q';
+					 }
+					 else
+						alert(result);   
+					window.close();	       
+                } else if (event.type === 'exception') {
+                    window.opener.location.href = '/00Q';
+                    window.close();	 
+                } else {
+                }
+            }, 
+            {escape: true});
+     </script> 
+       
+     <div style="width:100%;height:300px;text-align:center;">
+     	<h3 style="line-height:150px;">Processing...</h3>
+     </div>    
+</apex:page>

@@ -1,0 +1,18 @@
+<apex:page controller="TaskDJController">
+    <apex:form >
+    <apex:pageBlock >
+        <apex:repeat value="{!finalMap}" var="key">
+            <apex:pageBlockSection title="{!key} Events">
+                <apex:pageBlockTable value="{!finalMap[key]}" var="obj">
+                    <apex:column value="{!obj.Name}"/>
+                    <apex:column value="{!obj.Id}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            
+        </apex:repeat>
+        <apex:pageBlockButtons >
+            	<apex:commandButton action="{!next}" value="next"/>
+            </apex:pageBlockButtons>
+    </apex:pageBlock>
+        </apex:form>
+</apex:page>

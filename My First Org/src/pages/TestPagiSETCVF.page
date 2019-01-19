@@ -1,0 +1,29 @@
+<apex:page controller="TestAccPagiCont" docType="html-5.0" tabStyle="Employee__c">
+    <apex:sectionHeader title="Employee" subtitle="Employee Pagination" />
+     <apex:form id="theForm">
+      <apex:pageBlock title="All Employees" rendered="{!wrapperRecordList.size!=0}" id="pbId" >
+          <apex:pageBlockTable value="{!wrapperRecordList}" var="cont">
+           <apex:column headerValue="Select">
+             <apex:inputCheckbox value="{!cont.isSelected}"/>
+           </apex:column>
+           <apex:column headerValue="Name">
+             <apex:outputField value="{!cont.empRecord.name}"/>
+           </apex:column>
+           <apex:column headerValue="Id">
+               <apex:outputField value="{!cont.empRecord.Id}"/></apex:column>
+       </apex:pageBlockTable>
+         Page : {!pageNumber} of {!TotalPages}
+          <apex:outputPanel style="text-align:center;" layout="block">
+              <apex:commandButton value="First" reRender="pbId" action="{!first}" disabled="{!NOT(hasPrevious)}" status="paginationStatus"/>
+          <apex:commandButton value="Next" rerender="pbId" action="{!next}" disabled="{!NOT(hasNext)}" status="paginationStatus"/>
+               <apex:commandButton value="Previous" rerender="pbId" action="{!previous}" disabled="{!NOT(hasPrevious)}"  status="paginationStatus"/>
+           <apex:commandButton value="Last" rerender="pbId" action="{!last}" disabled="{!NOT(hasNext)}" status="paginationStatus"/>
+          <apex:actionStatus id="paginationStatus">
+             <apex:facet name="start">
+                 Please wait...<img src="/img/loading32.gif" style="width: 18px;"/>
+             </apex:facet>
+          </apex:actionStatus>
+       </apex:outputPanel>
+         </apex:pageBlock>
+    </apex:form>
+</apex:page>

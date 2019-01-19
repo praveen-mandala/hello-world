@@ -1,0 +1,25 @@
+<!--
+Author : Praveen
+Date   : 30-07-2018 
+Description : Display Account Names with pagination. 
+-->
+<apex:page standardController="Account" recordSetvar="accounts">
+    <apex:pageBlock title="Viewing Accounts">
+        <apex:form id="theForm">
+            <apex:pageBlockSection >
+                <apex:pageBlockTable var="a" value="{!accounts}" rows="20">
+                    <apex:column value="{!a.Name}"/>
+                    <apex:column value="{!a.Rating}"/>
+                    <apex:column value="{!a.Type}"/>
+                    <apex:column value="{!a.Industry}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection >
+                <apex:panelGrid columns="2">
+                    <apex:commandLink action="{!previous}">Previous </apex:commandLink>
+                    <apex:commandLink action="{!next}">Next </apex:commandLink>
+                </apex:panelGrid>
+            </apex:pageBlockSection>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

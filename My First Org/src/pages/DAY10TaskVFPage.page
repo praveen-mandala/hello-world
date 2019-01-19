@@ -1,0 +1,23 @@
+<!--
+Author : Praveen
+Date   : 04-07-2018 
+Description :  Display All Records in Visual force page,when text is entered in text search box by using Dynamic SOQL properties.
+-->
+<apex:page controller="DAY10TaskController">
+    <apex:form ><apex:pageBlock title="Contact Details">
+        <apex:pageBlockSection >
+            LastName:<apex:inputText title="LastName" value="{!LastName}"/>
+            Email :<apex:inputText value="{!Email}" />
+            Phone :<apex:inputText value="{!Phone}"/>
+            <apex:commandButton action="{!prepareSearchQuery}" value="getDetails" reRender="det"/>
+        </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock title="Contact Records">
+            <apex:pageBlockTable value="{!conList}" var="c" id="det"> 
+                <apex:repeat value="{!feildList}" var="o">
+                    <apex:column value="{!c[o]}"/>
+                </apex:repeat>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

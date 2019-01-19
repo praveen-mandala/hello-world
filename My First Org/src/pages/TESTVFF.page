@@ -1,0 +1,29 @@
+<apex:page title="ListOFAccounts" controller="TestPageContrl" readOnly="true" cache="false">
+    <apex:sectionHeader subtitle="SOQL Offset Example" title="Square Root Table"/>
+
+<apex:form >
+<apex:pageBlock >
+   <apex:pageBlockButtons location="top" >
+   <apex:outputPanel id="myButtons">   
+        <apex:commandButton action="{!Beginning}" title="Beginning" value="<<" disabled="{!disablePrevious}" reRender="myPanel,myButtons"/>
+        <apex:commandButton action="{!Previous}" title="Previous" value="<" reRender="myPanel,myButtons"/>        
+        <apex:commandButton action="{!Next}" title="Next" value=">" disabled="{!disableNext}" reRender="myPanel,myButtons"/>
+        <apex:commandButton action="{!End}" title="End" value=">>" disabled="{!disableNext}" reRender="myPanel,myButtons"/>           
+   </apex:outputPanel>
+   </apex:pageBlockButtons>            
+   <apex:pageBlockSection title="Accounts (Total List Size: {!total_size})" collapsible="false">
+   <apex:outputPanel id="myPanel">
+   <apex:pageMessages id="theMessages" />
+   <apex:pageBlockTable value="{!lstDisAcWrap}" var="acc" align="center" style="width:100%">		      
+       <apex:column >
+           <apex:inputCheckbox id="chkid" value="{!acc.chkAc}"/>
+       </apex:column>
+        <apex:column value="{!acc.AcId}" />
+        <apex:column value="{!acc.AcName}" />
+        <!--<apex:facet name="footer">Showing Page # {!pageNumber} of {!totalPages}</apex:facet>-->
+   </apex:pageBlockTable>
+   </apex:outputPanel>
+   </apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>

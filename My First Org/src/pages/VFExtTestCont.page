@@ -1,0 +1,17 @@
+<apex:page standardController="Account" extensions="ExtTestCont">
+    <apex:form >
+     <apex:pageBlock >
+        
+         <apex:pageBlockTable id="TableDiv" value="{! accList}" var="a">
+             <apex:column headerValue="AccName">
+             <apex:outputField value="{! a.Name}"/>
+             </apex:column>
+             <apex:column headerValue="AccId">
+             <apex:outputField value="{! a.Id}"/>
+             </apex:column>
+         </apex:pageBlockTable>
+        <apex:pageBlockButtons >
+        <apex:commandButton action="{! getInsert}" value="insert" reRender="TableDiv"/>
+        </apex:pageBlockButtons></apex:pageBlock>
+    </apex:form>        
+</apex:page>

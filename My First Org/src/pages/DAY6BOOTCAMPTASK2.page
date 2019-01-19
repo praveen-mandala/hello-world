@@ -1,0 +1,26 @@
+<!--
+Author : Praveen Goud
+Date   : 29-07-2018 
+Description : Display Contact details and option to edit and delete
+-->
+<apex:page standardController="Contact" recordSetVar="contactList">
+    <apex:pageBlock ><apex:form ><apex:pageMessages />
+        <apex:pageBlockTable value="{!contactList}" var="con">
+            <apex:column headerValue="Contact Name">
+                <apex:outputField value="{!con.LastName}"/>
+            </apex:column>
+            <apex:column headerValue="Email">
+                <apex:outputField value="{!con.Email}"/>
+            </apex:column>
+            <apex:column headerValue="Phone">
+                <apex:outputField value="{!con.Phone}"/>
+            </apex:column>
+            <apex:column headerValue="Modify">
+                <apex:commandLink action="{! URLFOR($Action.Contact.Edit,con.Id)}" style="color: #0FFFFF">edit</apex:commandLink>
+            </apex:column>
+            <apex:column headerValue="Delete">
+                <apex:commandLink action="{! URLFOR($Action.Contact.Delete,con.Id)}" style="color: #CCC">delete</apex:commandLink>
+            </apex:column>
+        </apex:pageBlockTable>
+        </apex:form></apex:pageBlock>
+</apex:page>

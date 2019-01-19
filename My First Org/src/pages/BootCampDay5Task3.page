@@ -1,0 +1,13 @@
+<!--
+Author : Praveen Goud
+Date   : 29-07-2018 
+Description : Display Contacts list using data table component
+-->
+<apex:page standardController="Contact" recordSetVar="conList">
+    <apex:pageBlock >
+        <apex:dataTable value="{!conList}" var="c" border="1">
+            <apex:column value="{!c.LastName}" headerValue="Last Name"/>
+            <apex:column value="{!c.Email}" headerValue="Email"/>
+        </apex:dataTable>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,26 @@
+<!--
+Author : Praveen Goud
+Date   : 14-07-2017
+Description : Display Account List on left side and selected detailed page on right.
+-->
+<apex:page controller="BOOTCAMPDAY6Task1REDO" sidebar="false">
+    <apex:form >
+    <apex:panelGrid columns="2">
+    <apex:pageBlock title="List of Accounts" id="pb1">
+        <apex:actionFunction action="{!showDetails}" name="actionMethod1" reRender="pb2">
+        		<apex:param name="firstParam" value="" />
+
+        </apex:actionFunction>
+        <apex:pageBlockTable value="{!accList}" var="acc" id="pbt1">
+            <apex:column headerValue="Name">
+                <apex:outputPanel styleClass="link" style="cursor: pointer;" title="click" onclick="actionMethod1('{!acc.Id}');return false;" > {!acc.Name}
+                </apex:outputPanel>
+                
+            </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock><apex:outputPanel id="pb2">
+        <apex:pageBlock rendered="{!flag}">
+          <apex:detail subject="{!$CurrentPage.Parameters.firstParam}" relatedList="false" />
+        </apex:pageBlock></apex:outputPanel>
+        </apex:panelGrid></apex:form>
+</apex:page>

@@ -1,0 +1,21 @@
+<apex:page controller="RenderedController">
+<apex:panelGrid columns="2">      
+        
+   <apex:pageBlock ><apex:form > 
+    <apex:commandButton value="save" action="{!accounts}"/>
+    <apex:pageBlockTable rendered="{!flag}" title="fsdkjfhdjskh" value="{!accountdata}" var="varObj">
+        <apex:column > <apex:commandLink value="{!varObj.Name}" action="{!accountsDetails}">
+         <apex:param value="{!varObj.Id}"  name="param1" assignTo="{!param1}"/>   
+            </apex:commandLink>
+        </apex:column>
+       
+    </apex:pageBlockTable></apex:form></apex:pageBlock><apex:pageBlock >
+      <apex:pageBlockTable rendered="{!flagdetails}" title="fsdkjfhdjskh" value="{!accountDetailsObj}" var="varObj1">
+        <apex:column value="{!varObj1.name}">  </apex:column>
+           
+    </apex:pageBlockTable>
+      </apex:pageBlock>
+       
+            
+    </apex:panelGrid>
+</apex:page>

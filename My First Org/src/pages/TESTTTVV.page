@@ -1,0 +1,32 @@
+<apex:page controller="AssignEventClsController">
+    <apex:form id="formId">
+    <apex:pageBlock id="pgEmp" title="Employee Details">
+        <apex:pageBlockSection columns="2">
+            <apex:outputField value="{!objEmp.Name}"/>
+            <apex:outputField value="{!objEmp.Company__c}"/>
+            <apex:outputField value="{!objEmp.Department__c}"/>
+            <apex:outputField value="{!objEmp.Job_Role__c}"/>
+        </apex:pageBlockSection>       
+    </apex:pageBlock>        
+    <apex:pageBlock id="ThePage" title="Scheduled Events">
+		<apex:pageBlockTable value="{!lstSetController}" var="wrp">
+            <apex:column headerValue="Select Events">
+                <apex:inputCheckbox id="chkEvent" value="{!wrp.chkEvent}"/>
+            </apex:column>
+            <apex:column headerValue="Event Name">
+                <apex:outputText value="{!wrp.evnt.Name}"></apex:outputText>
+            </apex:column>
+            <apex:column headerValue="Participation Type">
+                <apex:selectList value="{!wrp.sptype}" size="1">
+            		<apex:selectOptions value="{!wrp.items}"/>
+        			</apex:selectList>
+            </apex:column>
+        </apex:pageBlockTable>
+        <apex:outputPanel >
+           <apex:commandButton value="<<Previous" action="{!previous}" rendered="{!hasPrevious}" reRender="ThePage" />
+           <apex:commandButton value="Next >>" action="{!next}" rendered="{!hasNext}" reRender="ThePage" />
+        </apex:outputPanel>
+    </apex:pageBlock>
+        <apex:commandButton action="{!EventSubmit}" value="submit" rerender="formId"/>
+        </apex:form>
+</apex:page>

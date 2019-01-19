@@ -1,0 +1,17 @@
+<apex:page standardController="Contact" extensions="BootCampDay6Controller">
+   
+    <apex:pageBlock id="abc"><apex:form >
+    	<apex:pageBlockTable value="{!conList}" var="con"  >
+            
+            <apex:column value="{!con.LastName}" />
+            <apex:column value="{!con.Email}" />
+            <apex:column value="{!con.Phone}" />
+            <apex:column width="50">
+            	<apex:commandLink value="del" action="{!deleteRecord}"     >
+                    <apex:param assignTo="{!rec}" value="{!con.Id}" name="rec"/></apex:commandLink></apex:column>
+               <apex:column width="50"> <apex:commandLink value="edit" action="{!editRecord}"   >
+                    <apex:param assignTo="{!rec}" value="{!con.Id}" name="rec"/></apex:commandLink>
+            </apex:column>
+        </apex:pageBlockTable></apex:form>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,11 @@
+<apex:page controller="exampleCon">
+   <apex:form >
+    	<apex:pageBlock >
+            <apex:outputPanel id="Test">
+            <apex:outputText styleClass="btn" value="Click me : {!count}" />
+            <apex:actionSupport event="onclick" reRender="Test" action="{!incrementCounter}" status="myStatus" id="counterStatus"/>
+           <apex:actionStatus stopText="done!!" startText="incrementing...." id="myStatus"></apex:actionStatus>
+                </apex:outputPanel>
+       </apex:pageBlock> 
+    </apex:form>
+</apex:page>

@@ -1,0 +1,19 @@
+<apex:page >
+    <!--<apex:form >
+        Object Name : <apex:inputText value="{!strObjectName}"/> <br />
+        Fieldset Name : <apex:inputText value="{!strFieldsetName}"/> <br /> <br />
+        <apex:commandButton value="Search" action="{!DoFieldSetDynamic}" reRender="pb"/>
+        <apex:pageBlock title="Object Details" id="pb">
+            <apex:pageBlockSection title="Object" rendered="{!(objResult!=null)}">
+              <apex:outputField value="{!objResult['Name']}"/>
+          </apex:pageBlockSection>
+          
+          <apex:pageBlockSection title="Field Set">
+              <apex:repeat value="{!lstFields}" var="f">
+                  <apex:inputField value="{!objResult[f]}" />
+              </apex:repeat>
+          </apex:pageBlockSection>
+          
+        </apex:pageBlock>
+    </apex:form>  -->
+</apex:page>

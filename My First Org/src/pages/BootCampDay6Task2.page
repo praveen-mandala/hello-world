@@ -1,0 +1,22 @@
+<apex:page controller="BootCampDay6Controller">
+    <apex:panelGrid columns="2">
+    <apex:pageBlock ><apex:form >
+    	<apex:pageBlockTable value="{!conList}" var="con" id="abc" >
+            
+            <apex:column value="{!con.LastName}" />
+            <apex:column >
+            	<apex:commandLink value="del" action="{!deleteRecord}"   >
+                    <apex:param assignTo="{!rec}" value="{!con.Id}" name="rec"/></apex:commandLink>
+                <apex:commandLink value="edit" action="{!editRecord}"   >
+                    <apex:param assignTo="{!rec}" value="{!con.Id}" name="rec"/></apex:commandLink>
+            </apex:column>
+        </apex:pageBlockTable></apex:form>
+    </apex:pageBlock>
+       <apex:form > <apex:pageBlock mode="InlineEdit">
+            <apex:commandButton action="{!saveRecord}" value="save"/>
+          <apex:pageBlockTable rendered="{!flag}" value="{!con1}" var="cc">
+            	<apex:column value="{!cc.LastName}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock></apex:form>
+    </apex:panelGrid>
+</apex:page>

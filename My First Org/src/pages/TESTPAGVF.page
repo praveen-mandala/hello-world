@@ -1,0 +1,9 @@
+<apex:page >
+    <!--<apex:pageBlock title="Contacts" id="pb1">
+        <input id="contactSearch" type="text"/>
+        <button onclick="searchContactsList()">Search</button>
+    </apex:pageBlock>
+    <apex:pageBlock>
+    	<apex:commandLink />
+    </apex:pageBlock>-->
+</apex:page>

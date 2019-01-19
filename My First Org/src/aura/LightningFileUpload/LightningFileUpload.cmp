@@ -1,0 +1,9 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global">
+    <aura:attribute name="myRecordId" type="String" description="Record to which the files should be attached" />
+    <lightning:fileUpload label="Attach receipt"
+        name="fileUploader"
+        multiple="true"
+        accept=".pdf, .png"
+        recordId="0067F00000Gbtlu"
+        onuploadfinished="{!c.handleUploadFinished}" />
+</aura:component>

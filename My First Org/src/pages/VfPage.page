@@ -1,0 +1,15 @@
+<apex:page sidebar="false" showHeader="false" standardController="Account" recordSetVar="accounts" >
+
+    <apex:pageBlock title="Details" >
+        <apex:pageBlockSection title="User">
+    <h1>Hello World!!</h1></apex:pageBlockSection>
+    <h2>good afternoon</h2>
+        
+        
+        <apex:pageBlockTable title="User Info"  var="s" value="{! accounts}">
+            <apex:column value="{! s.Name}" />
+        <apex:column value="{! s.Phone}"  />
+        </apex:pageBlockTable>
+        </apex:pageBlock>
+
+</apex:page>

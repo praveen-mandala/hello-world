@@ -1,0 +1,14 @@
+<!-- 
+    Page Name: LeadConversion
+    Author : Vasu Takasi
+    Created On : 19th Mar 2013
+    Descrption : Used to Convert single or bulk leads into a custom object by mapping lead fields into selected fields 
+ -->
+<apex:page controller="Appshark_LC1.CustomLeadConversion" id="mypage" sidebar="true" docType="html-5.0" >    
+<!--    <script type="text/javascript" src="{!URLFOR($Resource.dragfoo, 'base.js')}" ></script> -->
+<!--    <script type="text/javascript" src="{!URLFOR($Resource.dragfoo, 'deps.js')}"></script> -->
+<apex:form id="theForm" >
+<apex:SectionHeader title="Lead Conversion"/>
+    <c:CustomLeadConversion_VC id="theCLC"/>
+</apex:form>    
+</apex:page>

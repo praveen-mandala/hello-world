@@ -1,0 +1,21 @@
+<!--
+	Author : Praveen Goud
+	Date   : 29-07-2018 
+	Description : Display Account details beside the Account List
+-->
+<apex:page standardController="Account" recordSetVar="accList" extensions="ControllerTTT">
+    <apex:panelGrid columns="2">
+    <apex:pageBlock ><apex:form >
+    	<apex:pageBlockTable value="{!accList}" var="acc">
+            <apex:column headerValue="AccountNames">
+                <apex:commandLink action="{!getDetails}" value="">{!acc.Name}
+                <apex:param assignTo="{!param}" value="{!acc.Id}" name="param"/>
+                </apex:commandLink>
+            </apex:column>
+        </apex:pageBlockTable></apex:form>
+   </apex:pageBlock>
+    	<apex:pageBlock rendered="{!flag}">
+            <apex:detail />
+        </apex:pageBlock>
+    </apex:panelGrid>
+</apex:page>

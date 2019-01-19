@@ -1,0 +1,11 @@
+<apex:page standardController="Contact" recordSetVar="contactList">
+     <script type="text/javascript">
+    	function someFunction() {
+            var a = document.getElementById('aTag').text;
+            window.alert(a);
+            
+            }
+    </script>
+     <a href="javascript:someFunction()" >A</a>
+    <a id="aTag" href="#" onclick="someFunction()">LINK</a>
+</apex:page>

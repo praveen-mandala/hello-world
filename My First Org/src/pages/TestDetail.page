@@ -1,0 +1,11 @@
+<apex:page standardController="Contact" recordSetVar="conList">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!conList}" var="con">
+                <apex:column headerValue="">
+                	<apex:detail relatedList="false" subject="{!con.Id}"/>
+                </apex:column>    
+            </apex:pageBlockTable>  
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

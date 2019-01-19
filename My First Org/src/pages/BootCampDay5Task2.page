@@ -1,0 +1,31 @@
+<!--
+Author : Praveen Goud
+Date   : 29-07-2018 
+Description : Display Read Only Contacts detail page.
+-->
+<apex:page standardController="Contact">
+    <apex:form >
+        <apex:pageBlock title="Contact Edit">
+            <apex:pageBlockSection >
+                <apex:outputField value="{!Contact.FirstName}"  /> 
+                <apex:outputField value="{!Contact.LastName}"  /> 
+                <apex:outputField value="{!Contact.AccountId}"  />
+                <apex:outputField value="{!Contact.Email}"  /> 
+                <apex:outputField value="{!Contact.Title}"  /> 
+                <apex:outputField value="{!Contact.Department}"  />
+                <apex:outputField value="{!Contact.LeadSource}"  /> 
+                <apex:outputField value="{!Contact.ReportsToId}"  /> 
+                <apex:outputField value="{!Contact.Birthdate}"  /> 	
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Phone Numbers" collapsible="false">
+                <apex:outputField value="{!Contact.Phone}"  /> 
+                <apex:outputField value="{!Contact.OtherPhone}"  /> 
+                <apex:outputField value="{!Contact.MobilePhone}"  />
+                <apex:outputField value="{!Contact.Fax}"  /> 
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Description Information" collapsible="false" >
+                <apex:outputField value="{!Contact.Description}" />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

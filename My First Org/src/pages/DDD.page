@@ -1,0 +1,27 @@
+<!--
+Author : Praveen
+Date   : 30-07-2018 
+Description :  Display Account Names as pick list and selected Account contacts
+-->
+<apex:page controller="RerenderContactsController">
+    <apex:pageBlock ><apex:form >
+        <apex:pageBlockSection >
+            <apex:selectList value="{!option}" size="1">
+                <apex:actionSupport event="onchange" action="{!getContacts}" reRender="Con" status="Status"/>
+                <apex:selectOptions value="{!accounts}" ></apex:selectOptions> 
+            </apex:selectList></apex:pageBlockSection>
+        <apex:actionStatus id="Status" >
+            <apex:facet name="start" >
+                <img src="/img/loading.gif" />                    
+            </apex:facet>
+        </apex:actionStatus>
+        <apex:pageBlockSection id="Con" title="Contacts">
+            <apex:pageBlockTable value="{!conList}" var="c">
+                <apex:column value="{!c.LastName}"/>
+                <apex:column value="{!c.Email}"/>
+                <apex:column value="{!c.Phone}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,61 @@
+<!--
+Author : Praveen Goud
+Date   : 14-07-2018 
+Description : Display Account Names with pagination Using Javascript. 
+-->
+<apex:page controller="PaginationREDOController">
+    <script type="text/javascript">
+    var total = '{!totalPages}';
+    var offset = 0;
+    var limit = 10;
+    var current = 1;
+    var previous = 0;
+    function nextList(){
+        document.getElementById("pbtn").disabled = false;//enable previous button
+        offset =current * limit;
+        previous = current;
+        if(current < total){
+            current++;
+        }
+        else if(current == total){
+            document.getElementById("nbtn").disabled = true;//disable next button
+        }
+        checkFunction(offset);
+    }
+    function previousList(){
+        document.getElementById("nbtn").disabled = false;//enable next button
+        previous--;
+        if(previous >= 0 )
+            current = previous+1;
+        else{
+            document.getElementById("pbtn").disabled = true;//disable previous button
+            current = 0;
+        }
+        offset =previous * limit;
+        window.alert(previous);
+        checkFunction(offset);        
+    }
+    </script>
+    
+    <apex:pageBlock Title="Pagination" id="pb">
+        <button onclick="previousList()" id="pbtn">Previous</button>
+        <button onclick="nextList()" id="nbtn">Next</button>
+        <apex:form id="Form">
+            <apex:actionFunction action="{!getContacts}" name="checkFunction" reRender="Form">
+                <apex:param name="off" value=""/>
+            </apex:actionFunction>
+            <apex:pageBlock title="View Contacts" id="pb1">
+                <apex:pageBlockSection id="pbs1" rendered="{!!flag}">    
+                    <apex:pageBlockTable id="pbt" value="{!conList}" var="contact">
+                        <apex:column value="{!contact.LastName}"/>
+                        <apex:column value="{!contact.Phone}"/>
+                        <apex:column value="{!contact.Email}"/>
+                    </apex:pageBlockTable>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection rendered="{!flag}">
+                    No records found...!!!
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+        </apex:form> 
+    </apex:pageBlock>
+</apex:page>

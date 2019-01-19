@@ -1,0 +1,23 @@
+<apex:page controller="TestController" >
+    <apex:panelGrid columns="2">
+    <apex:pageBlock >
+        <apex:form >
+    	<apex:pageBlockTable value="{!accList}" var="acc"> 
+            <apex:column >
+                <apex:commandLink value="{!acc.Name}" action="{!getdetails}">
+                <apex:param assignTo="{!AccId}" name="AccId" value="{!acc.Id}"/>
+                </apex:commandLink>
+            </apex:column>
+        </apex:pageBlockTable></apex:form>
+        </apex:pageBlock>
+    <apex:pageBlock rendered="{!flag}">
+        <apex:pageBlockTable value="{!getDetails}" var="ac">
+            <apex:column value="{!ac.Name}"/>
+                <apex:column value="{!ac.Rating}"/>
+                    <apex:column value="{!ac.Type}"/>
+           
+        </apex:pageBlockTable> 
+        </apex:pageBlock>
+    
+    </apex:panelGrid>
+</apex:page>

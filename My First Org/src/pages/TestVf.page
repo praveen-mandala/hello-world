@@ -1,0 +1,22 @@
+<apex:page controller="TestVfApex" >
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+            <apex:commandButton value="UpdateAll" action="{!savein}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!Con}" var="c">
+                <apex:column headerValue="Name">
+                    <apex:outputField value="{!c.LastName}">
+                        <apex:inlineEditSupport event="onclick" /></apex:outputField>
+                </apex:column>
+                <apex:column headerValue="Email">
+                    <apex:outputField value="{!c.Email}">
+                    <apex:inlineEditSupport event="onclick" />
+                    </apex:outputField>
+                
+                </apex:column>
+               
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

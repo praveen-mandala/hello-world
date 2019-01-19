@@ -1,0 +1,58 @@
+<!--
+Author : Praveen
+Date   : 03-07-2018 
+Description :  Display All Records in Visual force page,when text is entered in text search box by using SOSL properties.
+-->
+<apex:page controller="DAY9SOSLController">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:inputText title="searchString"  id="input" value="{!searchText }" required="true"/>
+                <apex:commandButton value="search" action="{!getRecords}" reRender="Accounts,Contacts,Leads,Tests,Sessions" />
+            </apex:pageBlockSection></apex:pageBlock></apex:form>
+    <apex:pageBlock >
+        <apex:pageBlockSection id="Accounts" title="Accounts" >
+            <apex:pageBlockTable value="{!accList}" var="acc" rendered="{!!accflag}">	
+                <apex:column value="{!acc.Name}"/>
+                <apex:column value="{!acc.Owner.Name}"/>
+            </apex:pageBlockTable>
+            <apex:outputPanel id="noAcc" rendered="{!accflag}">
+                No records found!!
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection id="Contacts" title="Contacts">
+            <apex:pageBlockTable value="{!conList}" var="con" rendered="{!!conflag}">
+                <apex:column value="{!con.LastName}"/>
+                <apex:column value="{!con.Email}"/>
+            </apex:pageBlockTable>
+            <apex:outputPanel id="noCon" rendered="{!conflag}">
+                No records found!!
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection id="Leads" title="Leads">
+            <apex:pageBlockTable value="{!leadList}" var="lead" rendered="{!!leadflag}">
+                <apex:column value="{!lead.Name}"/>
+                <apex:column value="{!lead.Email}"/>
+            </apex:pageBlockTable>
+            <apex:outputPanel id="noLead" rendered="{!leadflag}">
+                No records found!!
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection id="Tests" title="Tests">
+            <apex:pageBlockTable value="{!testList}" var="test" rendered="{!!testflag}">
+                <apex:column value="{!test.Name}"/>
+            </apex:pageBlockTable>
+            <apex:outputPanel id="noTest" rendered="{!testflag}">
+                No records found!!
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection id="Sessions" title="Sessions">
+            <apex:pageBlockTable value="{!sessionList}" var="session" rendered="{!!sessionflag}">
+                <apex:column value="{!session.Name}"/>
+            </apex:pageBlockTable>
+            <apex:outputPanel id="noSession" rendered="{!sessionflag}">
+                No records found!!
+            </apex:outputPanel>
+        </apex:pageBlockSection>
+    </apex:pageBlock>  
+</apex:page>

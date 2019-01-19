@@ -1,0 +1,63 @@
+<!--
+Author : Praveen
+Date   : 04-07-2018 
+Description :  Display All Records in Visual force page,when text is entered in text search box by using Dynamic SOQL properties.
+-->
+<apex:page controller="DAY10Task2">
+    <apex:form >
+        <apex:pageBlock title="CONTACT OBJECT">
+            <apex:pageBlockSection title="Get all the Fields in Contact">
+                <apex:commandLink action="{!getFields}" value="GetFields" reRender="pbt1"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="pbt1" >
+                <apex:selectList multiselect="false" size="1" rendered="{!viewFields}">
+                    <apex:selectOptions value="{!options}"></apex:selectOptions>
+                </apex:selectList>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Get LeadSource PickList Values">
+                <apex:commandLink action="{!getPickListValues}" value="getLeadSourcePickListValues"  reRender="pbt2"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="pbt2" >
+                <apex:selectList multiselect="false" size="1" rendered="{!showPickListValues}">
+                    <apex:selectOptions value="{!options1}"></apex:selectOptions>
+                </apex:selectList>
+            </apex:pageBlockSection>
+        </apex:pageBlock><apex:pageBlock >
+        <apex:pageBlockSection title="Get Contact Child Objects">
+            <apex:commandLink action="{!getChildRelatedLists}" value="getChildRelatedLists"  reRender="pbt3"/>
+        </apex:pageBlockSection>
+        <apex:pageBlockSection id="pbt3" >
+            <apex:selectList multiselect="false" size="1" rendered="{!viewChilds}">
+                <apex:selectOptions value="{!options2}"></apex:selectOptions>
+            </apex:selectList>
+        </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock >
+            <apex:pageBlockSection title="Get Value of Specific Field">
+                <apex:commandLink action="{!getRecords}" value="getContactRecords"  reRender="pbt3" />
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="pbt3">
+                <apex:selectList multiselect="false" size="1" value="{!selectedOption}" rendered="{!showFieldss}"> 
+                    <apex:actionSupport action="{!getFields}" event="onchange" reRender="pbt4"> 
+                        <apex:param assignTo="{!selectedOption}" name="selectedOption" value="" />
+                    </apex:actionSupport>
+                    <apex:selectOptions value="{!options3}">
+                    </apex:selectOptions>
+                </apex:selectList>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="pbt4"  >
+                <apex:selectList multiselect="false" size="1" value="{!selectedField}" rendered="{!viewFields}">
+                    <apex:param assignTo="{!selectedField}" name="selectedField" value="" />
+                    <apex:actionSupport action="{!display}" event="onchange" reRender="pb5"> 
+                    </apex:actionSupport>
+                    <apex:selectOptions value="{!options}"></apex:selectOptions>
+                </apex:selectList>
+            </apex:pageBlockSection><apex:pageBlockSection >
+            <apex:pageBlockTable value="{!conList}" var="cc" id="pb5">
+                <apex:column value="{!cc[selectedField]}"/>
+            </apex:pageBlockTable></apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form> 
+</apex:page>

@@ -1,0 +1,65 @@
+<!--
+Author : Praveen
+Date   : 03-07-2018 
+Description :  Display All Records in Picklist,when you select Records all related Child records should be selected(using Project object)
+-->
+<apex:page controller="Day8Controller">
+    <script type="text/javascript">
+    window.onload = function() {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.Day8Controller.getContactNames}',
+            function(result,event){
+                if(event.status){
+                    var select_element = "<select id=\"sId\" onchange=\"getRemoteContactTask()\" >";
+                    for (i = 0; i < result.length; i++) {
+                        select_element +="<option value="+result[i].Id+">"+result[i].LastName+"</option>";
+                    }
+                    select_element +="</select>";
+                    document.getElementById("slist").innerHTML=select_element;
+                }else if (event.type === 'exception') {
+                    document.getElementById("responseErrors").innerHTML =
+                        event.message + "<br/>\n<pre>" + event.where + "</pre>";
+                } else {
+                    document.getElementById("responseErrors").innerHTML = event.message;
+                }
+                {escape: true}
+            }
+        )
+    }      
+    function getRemoteContactTask(){
+        var contId = document.getElementById('sId').value;
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.Day8Controller.getContactTasks}',
+            contId,
+            function(result, event){
+                var taskInfo = '';
+                if(event.status){
+                    if(result.length==0){
+                        document.getElementById('{!$Component.contactInfo.pb2.blockSection}').innerHTML = 'No results found';
+                        return;
+                        }
+                    result.forEach(function(values){
+                        taskInfo += "<li>"+values['Subject']+"</li>";    
+                    });
+                    document.getElementById('{!$Component.contactInfo.pb2.blockSection}').innerHTML = taskInfo;
+                }else if (event.type === 'exception') {
+                    document.getElementById("responseErrors").innerHTML =
+                        event.message + "<br/>\n<pre>" + event.where + "</pre>";
+                } else {
+                    document.getElementById("responseErrors").innerHTML = event.message;
+                } 
+            },
+            {escape: true}
+        )
+    }
+    </script>
+    <apex:form id="contactInfo"> 
+        <div id="responseErrors"></div>
+        <apex:pageBlock title="Contacts" id="pb1">
+            <div id='slist'>
+            </div></apex:pageBlock>
+        <apex:pageBlock title="Contact tasks" id="pb2">
+            <apex:pageBlockSection id="blockSection" ></apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

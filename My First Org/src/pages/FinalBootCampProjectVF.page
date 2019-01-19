@@ -1,0 +1,34 @@
+<apex:page controller="FinalBootCampProject">
+    
+    <apex:form >
+        <apex:sectionHeader title="Assign Employees" subtitle="Event"/>
+<apex:pageBlock >
+     <apex:pageBlockSection title="Event Details" id="pbs1">
+                <apex:outputField value="{!objEvent.Name}" id="tt"/>
+                <apex:outputField value="{!objEvent.Company__r.Name}"/>
+                <apex:outputField value="{!objEvent.Category__c}"/>
+                <apex:outputField value="{!objEvent.Type__c}"/>
+                <apex:outputField value="{!objEvent.Start_Date__c}"/>
+                <apex:outputField value="{!objEvent.End_Date__c}"/>
+            </apex:pageBlockSection>
+   <apex:pageBlockButtons >
+       <apex:outputPanel id="myButtons">     
+        <apex:commandButton action="{!Previous}" title="Previous" value="Previous" reRender="myPanel,myButtons"/>
+        <apex:commandButton action="{!Next}" title="Next" value="Next" disabled="{!disableNext}" reRender="myPanel,myButtons"/>
+   </apex:outputPanel>
+    </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Employee (Total List Size: )" collapsible="false">
+   <apex:outputPanel id="myPanel">
+   
+   <apex:pageBlockTable value="{!lstDispEmpWrap}" var="emp" align="center" style="width:100%">		      
+       <apex:column >
+           <apex:inputCheckbox id="chkid" value="{!emp.checkB}"/>
+       </apex:column>
+        <apex:column value="{!emp.EmpObj.Id}" />
+        <apex:column value="{!emp.EmpObj.Name}" />
+        <!--<apex:facet name="footer">Showing Page # {!pageNumber} of {!totalPages}</apex:facet>-->
+   </apex:pageBlockTable>
+   </apex:outputPanel>
+   </apex:pageBlockSection>
+        </apex:pageBlock></apex:form>
+</apex:page>

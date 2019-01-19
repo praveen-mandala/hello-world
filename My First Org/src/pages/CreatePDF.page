@@ -1,0 +1,21 @@
+<apex:page Controller="ExtController"  renderAs="pdf" >
+    <apex:pageBlock >
+    	<apex:form >
+            <apex:image url="/resource/1493749884000/ChatWindow"/>
+           <apex:panelGrid columns="3">
+             <!--  <apex:dataList value="{!accList}" var="c">
+                   
+                   <apex:outputField value="{!c.Name}"/>
+            </apex:dataList>-->
+            <apex:pageBlockTable value="{!conList}" var="bb">
+               <apex:column value="{!bb.Lastname}"/>
+               
+               </apex:pageBlockTable>
+        	
+                
+                </apex:panelGrid>
+            
+            
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

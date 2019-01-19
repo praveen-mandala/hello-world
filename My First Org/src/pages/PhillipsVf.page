@@ -1,0 +1,28 @@
+<apex:page controller="ParticipantsOverview" title="ParticipantsOverview">
+    <apex:pageBlock title="Top Participants">
+        <!-- This Section is to Display Top 3 Hosts -->
+        <apex:pageBlockSection title="Top 3 Hosts" collapsible="false">
+            <apex:pageBlockTable value="{!host1}" var="hostVar"  >
+                <apex:column value="{!hostVar.objEventAtt.Employee__r.name}"/>
+                <apex:column value="{!hostVar.objEventAtt.Employee__r.Employee_ID__c}"/>
+                <apex:column value="{!hostVar.objEventAtt.count__c}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+        <!-- This Section is to Display Top 3 Coordinators -->
+        <apex:pageBlockSection title="Top 3 Coordinators" collapsible="false">
+            <apex:pageBlockTable value="{!coOrdinators1}" var="coOrdinatorsVar" rows="3" >
+                <apex:column value="{!coOrdinatorsVar.objEventAtt.Employee__r.name}"/>
+                <apex:column value="{!coOrdinatorsVar.objEventAtt.Employee__r.Employee_ID__c}"/>
+                <apex:column value="{!coOrdinatorsVar.objEventAtt.count__c}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+        <!-- This Section is to Display Top 3 Participants -->
+        <apex:pageBlockSection title="Top 5 Participants" collapsible="false">
+            <apex:pageBlockTable value="{!participants1}" var="participantsVar" rows="5" >
+                <apex:column value="{!participantsVar.objEventAtt.Employee__r.name}" />
+                <apex:column value="{!participantsVar.objEventAtt.Employee__r.Employee_ID__c}" />
+                <apex:column value="{!participantsVar.objEventAtt.count__c}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:page>

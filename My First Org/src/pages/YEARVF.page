@@ -1,0 +1,19 @@
+<apex:page controller="TESTDATE">
+    <apex:form >
+    <apex:pageBlock >
+        <apex:actionFunction action="{!selectedYearMeth}" name="check" reRender="pds1"/>
+        
+    	select Year : 
+        <apex:selectList value="{!selectedYear}" multiselect="false" size="1" onchange="check()">
+        	<apex:selectOptions value="{!options1}"/>
+
+        </apex:selectList>
+        
+        <apex:pageBlockSection title="Total Events Completed" id="pds1">
+        {!count}
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Total Upcoming Events" id="pds2">
+        {!count}
+        </apex:pageBlockSection>
+    </apex:pageBlock></apex:form>
+</apex:page>

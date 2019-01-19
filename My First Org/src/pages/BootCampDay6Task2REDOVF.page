@@ -1,0 +1,29 @@
+<!--
+Author : Praveen Goud
+Date   : 14-07-2017
+Description : Display Contact details and option to edit and delete
+-->
+<apex:page controller="BootCampDay6Task2REDO">
+    <apex:form >
+        <apex:pageBlock title="Contacts" mode="InlineEdit" id="pb1">
+            
+            <apex:pageBlockTable value="{!conList}" var="con" >
+                <apex:column headerValue="Name">
+                    <apex:outputField value="{!con.LastName}"/></apex:column>
+                
+                <apex:column headerValue="Phone"> <apex:outputField value="{!con.Phone}"/>
+                </apex:column>
+                <apex:column headerValue="Edit"> 
+                    <apex:commandButton action="{!editRecord}" value="edit"  reRender="pb1">
+                        
+                    </apex:commandButton>
+                </apex:column>
+                <apex:column headerValue="Delete">
+                    <apex:commandButton id="delete"   value="Delete"  action="{!deleteRecord}" reRender="pb1">
+                        <apex:param assignTo="{!recId}" id="recId" value="{!con.Id}" name="recId" />
+                    </apex:commandButton>
+                </apex:column> 
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

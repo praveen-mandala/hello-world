@@ -1,0 +1,14 @@
+<apex:page controller="RerenderContactsController">
+    <apex:pageBlock ><apex:form >
+        <apex:pageBlockSection >
+    	<apex:selectList value="{!accList1}" size="1" onchange="Con">
+        	 <apex:selectOptions value="{!accounts}" ></apex:selectOptions> 
+        </apex:selectList></apex:pageBlockSection>
+        <apex:pageBlockSection id="Con" title="COntacts">
+        	<apex:pageBlockTable value="{!conList}" var="c">
+            	<apex:column value="{!c.LastName}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlockSection>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>

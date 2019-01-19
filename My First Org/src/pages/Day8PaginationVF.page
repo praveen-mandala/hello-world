@@ -1,0 +1,89 @@
+<!--
+Author : praveen
+Date   : 30-07-2018 
+Description : Display Contact Names with pagination 
+-->
+<apex:page standardController="Contact" extensions="Day8PaginationController" recordSetvar="contacts">
+    <script type="text/javascript">
+    var offset = 0;
+    var limit = 10;
+    var currpPage = 0;
+    var searchString = "";
+    var prevPage = 0;
+    function searchContactsList(){
+    	searchString = document.getElementById('contactSearch').value;
+        if(searchString==""){
+        	alert("Please enter search string");
+            return;
+        }
+        offset = 0;
+        limit = 10;
+        currpPage = 0;
+        prevPage = 0;
+        nextContactsList();
+    }
+    function nextContactsList(){
+        searchString = document.getElementById('contactSearch').value;
+        offset =currpPage * limit;
+        prevPage = currpPage;
+        currpPage++;
+        utility();
+    }
+    function preContactsList(){
+        prevPage--;
+        searchString = document.getElementById('contactSearch').value;
+        if(prevPage == ""){
+            prevPage = 0;
+        }
+        if(prevPage < 0){
+            document.getElementById("searchset").innerHTML = "No results found";
+            return;
+        }
+        offset =prevPage * limit;
+	utility();        
+    }
+    function utility() {
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.Day8PaginationController.getNxtContact}',
+            searchString,
+            offset,
+            function(result, event){
+                if(event.status){
+                    if(result.length == 0){
+                        document.getElementById("{!$Component.theForm.pb1.pbs1.ser}").innerHTML = "No results found";
+                        return;
+                    }
+                    preapteContactsList = "<table border=1><th>LastName</th><th>Description</th><th>Industry</th>";
+                    result.forEach(function(contact){
+                        // preapteContactsList += "<tr><td>"+contact['FirstName']+"</td>";
+                        preapteContactsList += "<tr><td>"+contact['LastName']+"</td>";
+                        preapteContactsList += "<td>"+contact['Email']+"</td>";
+                        preapteContactsList += "<td>"+contact['Phone']+"</td></tr>";
+                    })
+                    preapteContactsList += "</table>";
+                    document.getElementById("{!$Component.theForm.pb1.pbs1.ser}").innerHTML = preapteContactsList;
+                }
+            })
+	}
+    </script>
+    
+    <apex:pageBlock title="Contacts" id="pb1">
+        <input id="contactSearch" type="text"/>
+        <button onclick="searchContactsList()">Search</button>
+    </apex:pageBlock>
+    <button id="searchPrevious" onclick="preContactsList()">Back</button>
+    <button id="searchNext" onclick="nextContactsList()">Next</button>
+    <apex:form id="theForm">
+        <apex:pageBlock title="View Contacts" id="pb1">
+            <apex:pageBlockSection id="pbs1">    
+                    <apex:pageBlockTable id="ser" value="{!contacts}" var="contact">
+                    <apex:column value="{!contact.LastName}"/>
+                    <apex:column value="{!contact.Phone}"/>
+                    <apex:column value="{!contact.Email}"/>
+                    </apex:pageBlockTable>
+        </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+    </apex:form> 
+    
+</apex:page>

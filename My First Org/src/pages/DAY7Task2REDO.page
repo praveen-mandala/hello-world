@@ -1,0 +1,38 @@
+<!--
+Author : Praveen
+Date   : 18-07-2017 
+Description :  When Account record is clicked send id as param using apex:actionsupport and show loading text using apex:actionstatus
+-->
+<apex:page standardController="Account" extensions="ControllerDay7" recordSetVar="accountList">
+    <apex:form >
+    <apex:pageBlock title="List Of Accounts">
+    	<apex:pageBlockTable value="{!accountList}" var="acc">
+            <apex:column headerValue="Account Names">
+            	<apex:commandLink title="acc.Name" value="{!acc.Name}" reRender="pb2">
+                <apex:actionSupport action="{!getAccDetails}" event="onclick" reRender="pb2" status="actStatusId" >
+                    <apex:param assignTo="{!selectedAcc}" value="{!acc.ID}" name="selectedAcc"/>
+                </apex:actionSupport>
+                </apex:commandLink>
+                <apex:actionStatus id="actStatusId" >
+                        <apex:facet name="start" >
+                            <img src="/img/loading.gif" />                    
+                        </apex:facet>
+                    </apex:actionStatus>
+            </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+        <apex:pageBlock title="Account Details" id="pb2">
+        	<apex:pageBlockTable value="{!accountLst}" var="acnt" rendered="{!flag}">
+                <apex:column headerValue="Id">
+                	{!acnt.Id}
+                </apex:column>
+                <apex:column headerValue="Name">
+                	{!acnt.Name}
+                </apex:column>
+            </apex:pageBlockTable>
+            <apex:pageBlockSection rendered="{!!flag}">
+            	Please Select any Account
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        </apex:form>
+</apex:page>

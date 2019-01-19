@@ -1,0 +1,50 @@
+<apex:page standardController="Contact" recordSetVar="contactList" extensions="AccRemoter" >
+    
+    <script type="text/javascript">
+    function getRemoteContact() {
+        var contactName = document.getElementById('contactSearch').value;
+        // alert(contactName);
+        Visualforce.remoting.Manager.invokeAction (
+            '{!$RemoteAction.AccRemoter.getContacts1}',
+            contactName,
+            function(result, event) {
+                var contactNames='';
+                console.log("Values are "+JSON.stringify(result));
+                if(event.status){
+                    result.forEach(function(values){
+                        contactNames += "<li>"+values['LastName']+"</li>";
+                        console.log("Values are "+JSON.stringify(values));
+                        
+                    });
+                    console.log("Values are "+JSON.stringify(contactNames));
+                    document.getElementById('{!$Component.block.theForm.PB1}').innerHTML = contactNames;
+                }  
+                else {
+                    document.getElementById("responseErrors").innerHTML = event.message;
+                }
+            },
+        );
+            {escape: true}
+            }
+            </script>
+    <input id="contactSearch" type="text"/>
+    <button onclick="getRemoteContact()">Get Contact</button>
+    <div id="responseErrors"></div>
+    
+    <apex:pageBlock title="Viewing Contact" id="block">
+        <apex:form id="theForm">
+            <apex:pageBlockSection id="PB1">
+                <apex:pageBlockTable var="a" value="{!conList1}" rows="1" id="PBT1">
+                    <apex:column value="{!a.LastName}"/>
+               </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="PB2" >
+                <apex:panelGrid columns="2" id="PG1" >
+                    <apex:commandLink action="{!previous}">Previous </apex:commandLink>
+                    <apex:commandLink action="{!next}">Next </apex:commandLink>
+                </apex:panelGrid>
+            </apex:pageBlockSection>
+        </apex:form>
+    </apex:pageBlock>
+
+</apex:page>
